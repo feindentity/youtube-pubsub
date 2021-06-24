@@ -1,6 +1,8 @@
 # youtube-pubsub
 # Install for codespaces for this space
-wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O - | /bin/bash -s 1.0.0-rc.2
+wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O - | /bin/bash
+#don't forget to run 'dapr init'
+dapr init
 
 # For Sub
 dapr run -a sub -p 3501 -d ..\..\components\ -- dotnet run -urls http://*:3501
