@@ -13,3 +13,5 @@ dapr run -a pub -p 3500 -d ..\..\components\ -- dotnet run
 For CodeSpaces
 dapr run --app-id pub -p 3500 -d ../../components -- dotnet run
 
+view data for redis
+Xread COUNT 50 STREAMS above-store-user 0
