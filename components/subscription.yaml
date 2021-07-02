@@ -8,3 +8,5 @@ spec:
   pubsubname: pubsub
 scopes:
 - sub
+- user-subscriber-2
+- sub-test
