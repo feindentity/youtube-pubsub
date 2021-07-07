@@ -7,14 +7,18 @@ namespace sb_publisher
 //write to a topic 
     public class sbpub
     {
-        public async Task Main(string[] args)
+       static string connectionString = "Endpoint=sb://pubsubpoc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Yy4+uTSv/6TN0gy5FvDRATUTOufM0FPECOT3CNPl1I8=";
+       static string topicName = "sb-publisher-Code-spaces";
+       static ServiceBusClient sbClient;
+       static ServiceBusSender sbSender;
+       private const int numOfMessages = 3;
+
+        static async Task Main(string[] args)
         {
-            var connectionString = "Endpoint=sb://pubsubpoc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Yy4+uTSv/6TN0gy5FvDRATUTOufM0FPECOT3CNPl1I8=";
-            var topicName = "sb-publisher-Code-spaces";
-            var sbClient = new ServiceBusClient(connectionString);
-            var sbSender = sbClient.CreateSender(topicName);
-            var numOfMessages = 3;
-           
+             sbClient = new ServiceBusClient(connectionString);
+             sbSender = sbClient.CreateSender(topicName);
+
+                      
                        using ServiceBusMessageBatch messageBatch = await sbSender.CreateMessageBatchAsync();
 
             for (int i = 1; i <= 3; i++)
@@ -43,6 +47,7 @@ namespace sb_publisher
 
             Console.WriteLine("Press any key to end the application");
             Console.ReadKey();
+            return;
         }
     }
 }
