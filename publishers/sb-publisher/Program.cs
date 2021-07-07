@@ -7,7 +7,7 @@ namespace sb_publisher
 //write to a topic 
     public class sbpub
     {
-       static string connectionString = "Endpoint=https://pubsubpoc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Yy4+uTSv/6TN0gy5FvDRATUTOufM0FPECOT3CNPl1I8=";
+       static string connectionString = "Endpoint=https://pubsubpoc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Yy4+uTSv/6TN0gy5FvDRATUTOufM0FPECOT3CNPl1I8=;";
        static string topicName = "sb-publisher-code-spaces";
        static ServiceBusClient sbClient;
        static ServiceBusSender sbSender;
@@ -15,7 +15,14 @@ namespace sb_publisher
 
         static async Task Main(string[] args)
         {
-             sbClient = new ServiceBusClient(connectionString);
+          //  Microsoft.ServiceBus.ConnectivityMode = 3;
+
+            var sbOptions = new ServiceBusClientOptions();
+            sbOptions.TransportType =ServiceBusTransportType.AmqpWebSockets;
+          //   sbOptions.
+         
+             sbClient = new ServiceBusClient(connectionString, sbOptions);
+        
              sbSender = sbClient.CreateSender(topicName);
              
                       
