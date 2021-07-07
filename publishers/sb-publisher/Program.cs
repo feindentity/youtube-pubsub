@@ -15,12 +15,10 @@ namespace sb_publisher
 
         static async Task Main(string[] args)
         {
-          //  Microsoft.ServiceBus.ConnectivityMode = 3;
-
+        
             var sbOptions = new ServiceBusClientOptions();
             sbOptions.TransportType =ServiceBusTransportType.AmqpWebSockets;
-          //   sbOptions.
-         
+          
              sbClient = new ServiceBusClient(connectionString, sbOptions);
         
              sbSender = sbClient.CreateSender(topicName);

@@ -8,5 +8,5 @@ spec:
   version: v1
   metadata:
   - name: connectionString # Required
-    value: "Endpoint=https://pubsubpoc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Yy4+uTSv/6TN0gy5FvDRATUTOufM0FPECOT3CNPl1I8=;"
+    value: "Endpoint=sb://pubsubpoc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Yy4+uTSv/6TN0gy5FvDRATUTOufM0FPECOT3CNPl1I8="
  
