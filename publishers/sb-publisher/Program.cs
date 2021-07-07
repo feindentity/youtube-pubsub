@@ -7,8 +7,8 @@ namespace sb_publisher
 //write to a topic 
     public class sbpub
     {
-       static string connectionString = "Endpoint=sb://pubsubpoc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Yy4+uTSv/6TN0gy5FvDRATUTOufM0FPECOT3CNPl1I8=";
-       static string topicName = "sb-publisher-Code-spaces";
+       static string connectionString = "Endpoint=https://pubsubpoc.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=Yy4+uTSv/6TN0gy5FvDRATUTOufM0FPECOT3CNPl1I8=";
+       static string topicName = "sb-publisher-code-spaces";
        static ServiceBusClient sbClient;
        static ServiceBusSender sbSender;
        private const int numOfMessages = 3;
@@ -17,7 +17,7 @@ namespace sb_publisher
         {
              sbClient = new ServiceBusClient(connectionString);
              sbSender = sbClient.CreateSender(topicName);
-
+             
                       
                        using ServiceBusMessageBatch messageBatch = await sbSender.CreateMessageBatchAsync();
 
