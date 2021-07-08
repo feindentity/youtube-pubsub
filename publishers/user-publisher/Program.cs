@@ -5,10 +5,12 @@ namespace pub
     class Program
     {
         static readonly HttpClient client=new HttpClient();
-        static readonly string daprPort =Environment.GetEnvironmentVariable("DAPR_HTTP_PORT");
+
+ 
+        static readonly string daprPort =Environment.GetEnvironmentVariable("DAPR_HTTP_PORT") ;
         static void Main(string[] args)
         {
-            for(int counter=0; counter <10;counter++)
+            for(int counter=0; counter <100;counter++)
             {
              var data =$"{{\"action\":\"add\",\"id\":\"{counter}\"}}";
              System.Console.WriteLine($"Sending {data}");

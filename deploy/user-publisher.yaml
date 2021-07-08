@@ -1,0 +1,44 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: user-publisher
+  labels:
+    app: user-publisher
+spec:
+  selector:
+    app: user-publisher
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8085
+  type: LoadBalancer
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-publisher
+  labels:
+    app: user-publisher
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-publisher
+  template:
+    metadata:
+      labels:
+        app: user-publisher
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "user-publisher"
+        dapr.io/app-port: "3303"
+        dapr.io/sidecar-readiness-probe-delay-seconds: "300"
+        dapr.io/log-level: "debug"
+    spec:
+      containers:
+      - name: user-publisher
+        image: feindentity/user-publisher:latest
+        ports:
+        - containerPort: 3303
+        imagePullPolicy: Always
