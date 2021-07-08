@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/publishers/user-publisher/bin/Debug/net5.0/pub.dll",
+            "program": "${workspaceFolder}/publishers/sb-publisher/bin/Debug/net5.0/sb-publisher.exe",
             "args": [],
-            "cwd": "${workspaceFolder}/publishers/user-publisher",
+            "cwd": "${workspaceFolder}/publishers/sb-publisher",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
             "stopAtEntry": false
