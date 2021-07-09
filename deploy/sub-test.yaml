@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-publisher
+  name: sub-test
   labels:
-    app: user-publisher
+    app: sub-test
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: user-publisher
+      app: sub-test
   template:
     metadata:
       labels:
-        app: user-publisher
+        app: sub-test
       annotations:
         dapr.io/enabled: "true"
-        dapr.io/app-id: "user-publisher"
-        dapr.io/app-port: "3303"
+        dapr.io/app-id: "sub-test"
+        dapr.io/app-port: "3313"
         dapr.io/sidecar-readiness-probe-delay-seconds: "60"
         dapr.io/log-level: "debug"
     spec:
       containers:
-      - name: user-publisher
-        image: feindentity/user-publisher:loop-2
+      - name: sub-test
+        image: feindentity/sub-test:loop-3
         ports:
-        - containerPort: 3303
+        - containerPort: 3313
         imagePullPolicy: IfNotPresent
