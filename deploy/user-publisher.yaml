@@ -33,12 +33,12 @@ spec:
         dapr.io/enabled: "true"
         dapr.io/app-id: "user-publisher"
         dapr.io/app-port: "3303"
-        dapr.io/sidecar-readiness-probe-delay-seconds: "300"
+        dapr.io/sidecar-readiness-probe-delay-seconds: "60"
         dapr.io/log-level: "debug"
     spec:
       containers:
       - name: user-publisher
-        image: feindentity/user-publisher:latest
+        image: feindentity/user-publisher:loop
         ports:
         - containerPort: 3303
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
