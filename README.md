@@ -1,57 +1,84 @@
-# youtube-pubsub
-# Install for codespaces for this space
-wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O - | /bin/bash
-#don't forget to run 'dapr init'
-dapr init
+# Local Setup 
+## For subscribers\sub
+	dapr run -a sub -p 3313 -d ..\..\components\ -- dotnet run -urls http://*:3313
+## For publishers\user-publisher 
+	dapr run -a pub -p 3303 -d ..\..\components\ -- dotnet run
 
-# For Sub
-dapr run -a sub -p 3501 -d ..\..\components\ -- dotnet run -urls http://*:3501
+## view data for redis set
+1. Look up container id	
+		docker ps -f name=redis
+	
+		CONTAINER ID   IMAGE     COMMAND                  CREATED       STATUS       PORTS                                       NAMES
+		2d94138d64d0   redis     "docker-entrypoint.s…"   3 weeks ago   Up 4 hours   0.0.0.0:6379->6379/tcp, :::6379->6379/tcp   dapr_redis
 
-# For Codespaces
-dapr run --app-id sub -p 3501 -d ../../components -- dotnet run -urls http://*:3501
+2. use container id to access redis container cli
+   
+		docker exec -it 2d94138d64d0 redis-cli
+   
+3. Read your topic stream
+	
+		Xread COUNT 50 STREAMS above-store-user 0
 
-dapr run --app-id sub -p 3502 -d ../../components -- dotnet run -urls http://*:3502
-# For Pub
-dapr run -a pub -p 3500 -d ..\..\components\ -- dotnet run
-# For CodeSpaces
+# For Codespaces Setup
+## Install dapr for codespaces for this space
+	
+	wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O - | /bin/bash
+	#don't forget to run 'dapr init'
+	dapr init
+
+## For SubScriber
+	dapr run --app-id sub -p 3313 -d ../../components -- dotnet run -urls http://*:3313
+
+## For Pub
 dapr run --app-id pub -p 3500 -d ../../components -- dotnet run
 
-# view data for redis
-docker ps
-docker exec -it 2ff6628ce0c5 redis-cli
-Xread COUNT 50 STREAMS above-store-user 0
 
+# for Kubernetes setup
+## SETUP
+1. Install Chocolaty
+2. Install Minikube
+3. Install Dapr
+4. Install Helm
+5. Install Docker
+6. Init MiniKube
+7. Init Dapr for cluster
+		dapr init -k
+8. Use Helm to install Redis
 
-# Notes for Kubernetes
-	1. Install Chocolaty
-	2. Install Minikube
-	3. Install Dapr
-	4. Install Helm
-	5. Install Docker
-	6. Init MiniKube
-	7. Init Dapr In Minikube  -k
-	8. Helm in Redis
 		helm repo add bitnami https://charts.bitnami.com/bitnami
-helm repo update
-helm install redis bitnami/redis
-		
-		From <https://docs.dapr.io/getting-started/configure-state-pubsub/> 
-	9. Deploy PubSub and State to Kubernetes
-		a. Kubectl apply -f .\remote-redis-pubsub.yaml
-		b. Kubectl apply -f .\remote-redis-state.yaml
+		helm repo update
+		helm install redis bitnami/redis
+
+
+9. Deploy PubSub and State to Kubernetes in /deploy
 	
-Updating DAPR settings require a pod restart from initial findings
-You can use kubectl rollout restart deployment to kill and restart a new node. 
-kubectl rollout restart deployment python-subscriber
-To restart start deployed pod
 
+		Kubectl apply -f .\remote-redis-pubsub.yaml
+		Kubectl apply -f .\remote-redis-state.yaml
+	
+
+    
+look up 
 Inspect a container, using podname
-kubectl exec -it redis-replicas-1 -- bash
-NG5GODJIdTRuZA==
-4nF82Hu4nd
 
-Tools for Troubleshooting
-Dapr Kubernetes pod annotations spec | Dapr Docs
+## View Redis Setup 
+		kubectl exec -it redis-replicas-1 -- redis-cli
+		# Authenticate with redis password for cluster
+		AUTH 4nF82Hu4nd
+		# Lookup Topic
+		Xread COUNT 50 STREAMS above-store-user 0
+		# Delete Topic
+		delete above-store-user
+
+## Tools for Troubleshooting dapr and kubernetes
+- Updating DAPR settings require a pod restart from initial findings
+
+		#Example of restarting a pod
+		kubectl rollout restart deployment python-subscriber
+
+- [Dapr Common Issues](https://docs.dapr.io/operations/troubleshooting/common_issues/)
+- [Dapr Kubernetes pod annotations spec | Dapr Docs](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-annotations/)
+
 
 
 
