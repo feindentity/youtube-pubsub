@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: user-publisher
-        image: feindentity/user-publisher:loop-2
+        image: public.ecr.aws/m3s2c7t2/feindentity:pub-2
         ports:
         - containerPort: 3303
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
