@@ -78,6 +78,7 @@ Inspect a container, using podname
 
 - [Dapr Common Issues](https://docs.dapr.io/operations/troubleshooting/common_issues/)
 - [Dapr Kubernetes pod annotations spec | Dapr Docs](https://docs.dapr.io/operations/hosting/kubernetes/kubernetes-annotations/)
+- [Adding Debugging for working with DAPR in VSCode](https://docs.dapr.io/developing-applications/ides/vscode/#manually-configuring-visual-studio-code-for-debugging-with-daprd)
 
 
 
