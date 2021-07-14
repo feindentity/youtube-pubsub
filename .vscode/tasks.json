@@ -37,6 +37,38 @@
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
-        }
+        },
+        {
+            "label": "daprd-run-publisher",
+            "command": "daprd",
+            "args": [
+                "-app-id",
+                "pubsub",
+                "-app-port",
+                "5000",
+                "-dapr-http-port",
+                "3500",
+                "-dapr-grpc-port",
+                "52000",
+                "-components-path",
+                "C:\\Users\\feinberg_m\\source\\repos\\dapr\\UserLoad_POC\\Apps\\LilyCode\\PubSub\\components\\"
+
+            ],
+            "isBackground": true,
+            "problemMatcher": {
+                "pattern": [
+                    {
+                      "regexp": ".",
+                      "file": 1,
+                      "location": 2,
+                      "message": 3
+                    }
+                ],
+                "background": {
+                    "beginsPattern": "^.*starting Dapr Runtime.*",
+                    "endsPattern": "^.*waiting on port.*"
+                }
+            }
+        },
     ]
 }
