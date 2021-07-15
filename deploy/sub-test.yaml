@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: sub-test
-        image: feindentity/sub-test:loop-3
+        image: public.ecr.aws/m3s2c7t2/feindentity:sub
         ports:
         - containerPort: 3313
         imagePullPolicy: IfNotPresent
